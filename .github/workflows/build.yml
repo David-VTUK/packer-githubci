@@ -38,6 +38,6 @@ jobs:
         with:
           command: build
           arguments: "-color=false -on-error=abort"
-          target: /test/ubuntu-2004.json
+          target: ./test/ubuntu-2004.json
         env:
           PACKER_LOG: 1
