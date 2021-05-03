@@ -7,10 +7,13 @@ jobs:
   packer:
     runs-on: self-hosted
     name: packer
-
+    defaults:
+      run:
+        working-directory: ./test
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        
 
       # fix backwards incompatibilities in template
       - name: Fix Template
