@@ -1,17 +1,6 @@
 name: Build
 
 on: [pull_request, workflow_dispatch]
-env:
-  PKR_VAR_vcenter_server: ${{ secrets.VCENTER_SERVER }}
-  PKR_VAR_username: ${{ secrets.USERNAME }}
-  PKR_VAR_password: ${{ secrets.PASSWORD }}
-  PKR_VAR_datastore: ${{ secrets.DATASTORE }}
-  PKR_VAR_folder: ${{ secrets.FOLDER }}
-  PKR_VAR_host: ${{ secrets.HOST }}
-  PKR_VAR_cluster: ${{ secrets.CLUSTER }}
-  PKR_VAR_network: ${{ secrets.NETWORK }}
-  PKR_VAR_ssh_username: ${{ secrets.SSH_USERNAME }}
-  PKR_VAR_ssh_password: ${{ secrets.SSH_PASSWORD }}
 
 jobs:
   debug:
@@ -48,3 +37,14 @@ jobs:
           command: build
           arguments: "-color=false -on-error=abort"
           target: ./test/ubuntu-2004.json
+        env:
+          PKR_VAR_vcenter_server: ${{ secrets.VCENTER_SERVER }}
+          PKR_VAR_username: ${{ secrets.USERNAME }}
+          PKR_VAR_password: ${{ secrets.PASSWORD }}
+          PKR_VAR_datastore: ${{ secrets.DATASTORE }}
+          PKR_VAR_folder: ${{ secrets.FOLDER }}
+          PKR_VAR_host: ${{ secrets.HOST }}
+          PKR_VAR_cluster: ${{ secrets.CLUSTER }}
+          PKR_VAR_network: ${{ secrets.NETWORK }}
+          PKR_VAR_ssh_username: ${{ secrets.SSH_USERNAME }}
+          PKR_VAR_ssh_password: ${{ secrets.SSH_PASSWORD }}
