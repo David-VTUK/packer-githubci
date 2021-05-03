@@ -35,6 +35,7 @@ jobs:
           arguments: "-color=false -on-error=abort"
           target: ./test/ubuntu-2004.json
           PACKER_LOG: 1
+        env:
           PKR_VAR_vcenter_server: ${{ secrets.VCENTER_SERVER }}
           PKR_VAR_username: ${{ secrets.USERNAME }}
           PKR_VAR_password: ${{ secrets.PASSWORD }}
