@@ -43,5 +43,5 @@ jobs:
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
-          arguments: "-color=false -on-error=abort -var="image_id=ami-abc123""
+          arguments: "-color=false -on-error=abort"
           target: ./test/ubuntu-2004.json
