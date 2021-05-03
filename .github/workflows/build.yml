@@ -17,6 +17,7 @@ jobs:
         uses: hashicorp/packer-github-actions@master
         with:
           command: fix
+          target: /test/ubuntu-2004.json
 
       # validate templates
       - name: Validate Template
