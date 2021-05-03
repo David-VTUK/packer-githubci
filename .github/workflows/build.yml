@@ -3,6 +3,11 @@ name: Build
 on: [pull_request, workflow_dispatch]
 
 jobs:
+  debug:
+    runs-on: self-hosted
+    steps:
+      - run: ls -laR
+
   packer:
     runs-on: self-hosted
     name: packer
