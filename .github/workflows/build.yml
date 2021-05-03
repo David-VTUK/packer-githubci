@@ -14,11 +14,6 @@ env:
   PKR_VAR_ssh_password: ${{ secrets.SSH_PASSWORD }}
 
 jobs:
-  debug:
-    runs-on: self-hosted
-    steps:
-      - run: env
-
   packer:
     runs-on: self-hosted
     name: packer
