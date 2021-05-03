@@ -10,7 +10,9 @@ jobs:
 
     steps:
       - name: Checkout Repository
+      - run: ls -laR
         uses: actions/checkout@v2
+
 
       # fix backwards incompatibilities in template
       - name: Fix Template
