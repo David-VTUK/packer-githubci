@@ -16,7 +16,6 @@ env:
 jobs:
   debug:
     runs-on: self-hosted
-    name: debug
   - run: env
 
   packer:
