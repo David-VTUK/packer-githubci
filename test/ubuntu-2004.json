@@ -7,18 +7,18 @@
       "RAM": 2048,
       "CPUs": 4,
       "boot_order": "disk,cdrom",
-      "cluster": "{{env `cluster`}}",
+      "cluster": "{{user `cluster`}}",
       "convert_to_template": "true",
-      "datastore": "{{env `datastore`}}",
+      "datastore": "{{user `datastore`}}",
       "disk_controller_type": "pvscsi",
-      "host": "{{env `host`}}",
+      "host": "{{user `host`}}",
 
       "iso_url": "https://releases.ubuntu.com/20.04/ubuntu-20.04.1-live-server-amd64.iso",
       "iso_checksum": "443511f6bf12402c12503733059269a2e10dec602916c0a75263e5d990f6bb93",
 
       "network_adapters": [
         {
-          "network": "{{env `network`}}",
+          "network": "{{user `network`}}",
           "network_card": "vmxnet3"
         }
       ],
@@ -30,8 +30,8 @@
         }
       ],
 
-      "ssh_password": "{{env `ssh_password`}}",
-      "ssh_username": "{{env `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_username": "{{user `ssh_username`}}",
       "ssh_handshake_attempts": "50",
       "ssh_timeout": "1h",
       "http_directory": "http",
@@ -44,16 +44,16 @@
       ],
 
       "insecure_connection": "true",
-      "username": "{{env `username`}}",
-      "password": "{{env `password`}}",
-      "vcenter_server": "{{env `vcenter_server`}}",
+      "username": "{{user `username`}}",
+      "password": "{{user `password`}}",
+      "vcenter_server": "{{user `vcenter_server`}}",
       "vm_name": "Ubuntu_2004_Subiquity"
     }
   ],
 
   "provisioners": [
     {
-      "execute_command": "echo '{{env `ssh_password`}}' | sudo -S -E bash '{{.Path}}'",
+      "execute_command": "echo '{{user `ssh_password`}}' | sudo -S -E bash '{{.Path}}'",
       "scripts": [
         "script.sh"
       ],
