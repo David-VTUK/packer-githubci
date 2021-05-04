@@ -22,10 +22,6 @@ jobs:
       - name: config
         run : echo ${{ secrets.PACKER_CONFIG_BASE64 }} | base64 -d > ./test/variables.json
 
-      # Grab config file
-      - name: check
-        run : cat ./test/variables.json
-
       # validate templates
       - name: Validate Template
         uses: hashicorp/packer-github-actions@master
