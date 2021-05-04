@@ -31,5 +31,5 @@ jobs:
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
-          arguments: "-color=false -on-error=abort -var 'vcenter_server= ${{ secrets.VCENTER_SERVER }}' -var 'username=${{ secrets.USERNAME }}' -var 'password=${{ secrets.PASSWORD }}' -var 'datastore=${{ secrets.DATASTORE }}' -var 'folder=${{ secrets.FOLDER }}' -var 'host=${{ secrets.HOST }}' -var 'cluster=${{ secrets.CLUSTER }}' -var 'network=${{ secrets.NETWORK }}' -var 'ssh_username=${{ secrets.SSH_USERNAME }}' -var 'ssh_password=${{ secrets.SSH_PASSWORD }}'"
+          arguments: "-color=false -on-error=abort -var vcenter_server=${{ secrets.VCENTER_SERVER }} -var 'username=${{ secrets.USERNAME }}' -var 'password=${{ secrets.PASSWORD }}' -var 'datastore=${{ secrets.DATASTORE }}' -var 'folder=${{ secrets.FOLDER }}' -var 'host=${{ secrets.HOST }}' -var 'cluster=${{ secrets.CLUSTER }}' -var 'network=${{ secrets.NETWORK }}' -var 'ssh_username=${{ secrets.SSH_USERNAME }}' -var 'ssh_password=${{ secrets.SSH_PASSWORD }}'"
           target: ./test/ubuntu-2004.json
