@@ -6,13 +6,13 @@ jobs:
   config:
     runs-on: self-hosted
     steps:
-      - run: echo ${{ secrets.PACKER_CONFIG_BASE64 }} | base64 -d > variables.json
+      - run: echo ${{ secrets.PACKER_CONFIG_BASE64 }} | base64 -d > ./test/variables.json
   check:
     runs-on: self-hosted
     needs: config
     steps:
       - run: ls -la
-      - run: echo variables.json
+      - run: cat ./test/variables.json
   packer:
     runs-on: self-hosted
     needs: check
