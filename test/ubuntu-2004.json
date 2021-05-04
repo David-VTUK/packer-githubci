@@ -1,7 +1,7 @@
 {
   "builders": [
     {
-      "name": "ubuntu-2004",
+      "name": "ubuntu-2004-github",
       "type": "vsphere-iso",
       "guest_os_type": "ubuntu64Guest",
       "RAM": 2048,
@@ -47,7 +47,7 @@
       "username": "{{user `username`}}",
       "password": "{{user `password`}}",
       "vcenter_server": "{{user `vcenter_server`}}",
-      "vm_name": "Ubuntu_2004_Subiquity"
+      "vm_name": "Ubuntu_2004_github"
     }
   ],
 
