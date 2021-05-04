@@ -7,6 +7,11 @@ jobs:
     runs-on: self-hosted
     steps:
       - run: echo ${{ secrets.PACKER_CONFIG_BASE64 }} | base64 -d > variables.json
+  check:
+    runs-on: self-hosted
+    steps:
+      - run: ls-la
+      - run: echo variables.json
   packer:
     runs-on: self-hosted
     name: packer
