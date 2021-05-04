@@ -23,6 +23,11 @@ jobs:
           command: fix
           target: ./test/ubuntu-2004.json
 
+      # Grab Config File
+      runs-on: self-hosted
+      steps:
+        - run: echo ${{ secrets.PACKER_CONFIG_BASE64 }} | base64 -d > ./test/variables.json
+
       # validate templates
       - name: Validate Template
         uses: hashicorp/packer-github-actions@master
