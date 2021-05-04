@@ -7,15 +7,9 @@ jobs:
     runs-on: self-hosted
     steps:
       - run: echo ${{ secrets.PACKER_CONFIG_BASE64 }} | base64 -d > ./test/variables.json
-  check:
-    runs-on: self-hosted
-    needs: config
-    steps:
-      - run: ls -la
-      - run: cat ./test/variables.json
   packer:
     runs-on: self-hosted
-    needs: check
+    needs: config
     name: packer
 
     steps:
@@ -42,6 +36,5 @@ jobs:
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
-          arguments: "-color=false -on-error=abort"
-
+          arguments: "-color=false -on-error=abort --var-file=./test/variables.json"
           target: ./test/ubuntu-2004.json
