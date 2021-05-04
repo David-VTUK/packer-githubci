@@ -9,11 +9,13 @@ jobs:
       - run: echo ${{ secrets.PACKER_CONFIG_BASE64 }} | base64 -d > variables.json
   check:
     runs-on: self-hosted
+    needs: config
     steps:
       - run: ls -la
       - run: echo variables.json
   packer:
     runs-on: self-hosted
+    needs: check
     name: packer
 
     steps:
