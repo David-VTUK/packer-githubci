@@ -10,7 +10,7 @@ jobs:
   check:
     runs-on: self-hosted
     steps:
-      - run: ls-la
+      - run: ls -la
       - run: echo variables.json
   packer:
     runs-on: self-hosted
