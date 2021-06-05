@@ -37,7 +37,7 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: create configmap dir --from-file=./http
+          args: create configmap dir --from-file=./test/http
 
       - name: Upload Cloud-Init Data
         uses: steebchen/kubectl@master
@@ -53,3 +53,11 @@ jobs:
           command: build
           arguments: "-color=false -on-error=abort --var-file=./test/variables.json"
           target: ./test/ubuntu-2004.json
+
+      # cleanup
+      - name: Upload Cloud-Init Data
+        uses: steebchen/kubectl@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: delete -f ./test/cloud-init.yaml && kubectl delete cm dir
