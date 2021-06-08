@@ -19,7 +19,7 @@ jobs:
           target: ./test/ubuntu-2004.json
 
       # Grab config file
-      - name: config
+      - name: Generate variables.json
         run : echo ${{ secrets.PACKER_CONFIG_BASE64 }} | base64 -d > ./test/variables.json
 
       # validate templates
@@ -30,34 +30,41 @@ jobs:
           arguments: -syntax-only
           target: ./test/ubuntu-2004.json
 
-      # upload cloud-init
-
-      - name: Upload configmap
+      # Upload Configmap
+      - name: Upload Configmap & Publish Cloud-Init Data
         uses: steebchen/kubectl@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: create configmap dir --from-file=./test/http
+          args: create configmap dir --from-file=./test/http && kubectl apply -f ./test/cloud-init.yaml
 
-      - name: Upload Cloud-Init Data
-        uses: steebchen/kubectl@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      # Upload cloud-init Data
+     # - name: Upload Cloud-Init Data
+     #   uses: steebchen/kubectl@master
+     #   env:
+     #     KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+     #   with:
+     #     args: apply -f ./test/cloud-init.yaml
+
+      # Replace HTTP reference
+      - name: Replace HTTP reference
+        uses: ubuntu-latest
         with:
-          args: apply -f ./test/cloud-init.yaml
+          command: sed -i 's/{{ .HTTPIP }}:{{ .HTTPPort }}//cloudinit-service.virtualthoughts.co.uk/g' ./test/variables.json
 
-      # build artifact
-      - name: Build Artifact
+      # Build Template
+      - name: Build Template - Ubuntu 2004
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
-          arguments: "-color=false -on-error=abort --var-file=./test/variables.json"
+          arguments: "-color=false -on-error=abort --var-file=./test/variables.json -force"
           target: ./test/ubuntu-2004.json
 
       # cleanup
-      - name: Upload Cloud-Init Data
+      - name: Delete Configmap & Remove Cloud-Init Data
+
         uses: steebchen/kubectl@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: delete -f ./test/cloud-init.yaml && kubectl delete cm dir
+          args: delete cm dir && kubectl delete -f ./test/cloud-init.yaml
