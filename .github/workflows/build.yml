@@ -48,7 +48,7 @@ jobs:
 
       # Replace HTTP reference
       - name: Replace HTTP reference
-        run : sed -i 's/{{ .HTTPIP }}:{{ .HTTPPort }}//cloudinit-service.virtualthoughts.co.uk/g' ./test/variables.json
+        run : sed -i 's/{{ .HTTPIP }}:{{ .HTTPPort }}/cloudinit-service.virtualthoughts.co.uk/g' ./test/ubuntu-2004.json
 
       # Build Template
       - name: Build Template - Ubuntu 2004
